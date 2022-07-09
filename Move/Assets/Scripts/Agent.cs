@@ -10,11 +10,13 @@ public class Agent : MonoBehaviour
     public float rotation;
     public Vector3 velocity;
     protected Steering steering;
+    private Rigidbody aRigidbody;
 
     void Start()
     {
         velocity = Vector3.zero;
         steering = new Steering();
+        aRigidbody = GetComponent<Rigidbody>();
     }
 
     public void SetSteering(Steering steering)
@@ -24,6 +26,11 @@ public class Agent : MonoBehaviour
 
     public virtual void Update()
     {
+        if(aRigidbody == null)
+        {   
+            return;
+        }
+
         Vector3 displacement = velocity * Time.deltaTime;
         orientation += rotation * Time.deltaTime;
 
@@ -43,8 +50,14 @@ public class Agent : MonoBehaviour
 
     public virtual void LateUpdate()
     {
+        if(aRigidbody == null)
+        {   
+            return;
+        }
+
         velocity += steering.linear * Time.deltaTime;
         rotation += steering.angular * Time.deltaTime;
+
         if(velocity.magnitude > maxSpeed)
         {
             // 벡터 정규화
@@ -60,6 +73,31 @@ public class Agent : MonoBehaviour
         {
             velocity = Vector3.zero;
         }
+
         steering = new Steering();
+
+        Vector3 displacement = velocity * Time.deltaTime;
+        orientation += rotation * Time.deltaTime;
+        if(orientation < 0.0f)
+        {
+            orientation += 360.0f;
+        }
+        else if(orientation > 360.0f)
+        {
+            orientation -= 360.0f;
+        }
+
+        aRigidbody.AddForce(displacement, ForceMode.VelocityChange);
+        Vector3 orientationVector = OriToVec(orientation);
+        aRigidbody.rotation = Quaternion.LookRotation(orientationVector, Vector3.up);
+    }
+
+    // 방향을 벡터로 변환
+    public Vector3 OriToVec(float orientation)
+    {
+        Vector3 vector = Vector3.zero;
+        vector.x = Mathf.Sin(orientation * Mathf.Deg2Rad) * 1.0f;
+        vector.y = Mathf.Cos(orientation * Mathf.Deg2Rad) * 1.0f;
+        return vector.normalized;
     }
 }
