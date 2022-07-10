@@ -32,3 +32,8 @@ Agent는 행위를 하게될 대상 오브젝트에 사용하는 스크립트이
 - Target을 이용해 회피하고 싶은 오브젝트를 설정하면된다.  
 - EscapeRadius 범위 안에 들어온 경우 Agent가 회피함
 - DangerRadius 범위 밖이 될때까지 Agent가 천천히 회피함
+
+## [Align]
+
+
+## [Face]
