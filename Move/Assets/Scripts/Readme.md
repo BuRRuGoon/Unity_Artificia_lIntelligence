@@ -33,7 +33,13 @@ Agent는 행위를 하게될 대상 오브젝트에 사용하는 스크립트이
 - EscapeRadius 범위 안에 들어온 경우 Agent가 회피함
 - DangerRadius 범위 밖이 될때까지 Agent가 천천히 회피함
 
-## [Align]
+## [Align](https://github.com/BuRRuGoon/Unity_Artificia_lIntelligence/blob/main/Move/Assets/Scripts/Align.cs)
+아래의 기능들을 사용하기 위한 회전을 다루는 Align 행위 클래스
 
+## [Face](https://github.com/BuRRuGoon/Unity_Artificia_lIntelligence/blob/main/Move/Assets/Scripts/Face.cs)
+마주보는 기능
+- TargetRadius 안에 들어오게 되면 마주봄
 
-## [Face]
+## [Wander](https://github.com/BuRRuGoon/Unity_Artificia_lIntelligence/blob/main/Move/Assets/Scripts/Wander.cs)
+주변을 배회하는 기능 에이전트가 변위차까지 이동한뒤 랜덤으로 배회한다
+- Offset는 프로젝트마다 다르게 설정 -60~-90값을 주니 정상작동되었음
